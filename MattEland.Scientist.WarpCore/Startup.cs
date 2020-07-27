@@ -28,7 +28,11 @@ namespace MattEland.Scientist.WarpCore
         {
             services.AddControllers();
 
-            services.AddTransient<IWarpCoreServiceLayer, WarpCoreServiceLayer>();
+            services.AddSingleton<IWarpCoreServiceLayer, WarpCoreServiceLayer>();
+            services.AddSingleton<IWarpCoilInductionService, WarpCoilInductionService>();
+            services.AddSingleton<IDeflectorServiceLayer, DeflectorServiceLayer>();
+            services.AddSingleton<INacelleServiceLayer, NacelleServiceLayer>();
+            services.AddSingleton<IStarship, GalaxyClassStarship>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -49,6 +53,9 @@ namespace MattEland.Scientist.WarpCore
             {
                 endpoints.MapControllers();
             });
+
+            // Force the application to start up the starship by requesting the starship
+            app.ApplicationServices.GetService<IStarship>();
         }
     }
 }
