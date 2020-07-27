@@ -9,10 +9,13 @@ namespace MattEland.Scientist.WarpCore.Controllers
     public class NacelleController : ControllerBase
     {
         private readonly INacelleServiceLayer _nacelleServiceLayer;
+        private readonly IWarpCoilInductionService _coil;
 
-        public NacelleController(INacelleServiceLayer nacelleServiceLayer)
+        public NacelleController(INacelleServiceLayer nacelleServiceLayer,
+                                 IWarpCoilInductionService coil)
         {
             _nacelleServiceLayer = nacelleServiceLayer;
+            _coil = coil;
         }
 
         [HttpPost("Port")]
@@ -30,6 +33,9 @@ namespace MattEland.Scientist.WarpCore.Controllers
         private IActionResult HandleUpdate(NacelleInformation info)
         {
             _nacelleServiceLayer.UpdateInfo(info.Id, info);
+
+            _coil.RegisterNewReadings();
+            
             return Ok();
         }
     }

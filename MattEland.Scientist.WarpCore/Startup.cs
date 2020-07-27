@@ -32,6 +32,7 @@ namespace MattEland.Scientist.WarpCore
             services.AddSingleton<IWarpCoilInductionService, WarpCoilInductionService>();
             services.AddSingleton<IDeflectorServiceLayer, DeflectorServiceLayer>();
             services.AddSingleton<INacelleServiceLayer, NacelleServiceLayer>();
+            services.AddSingleton<IWarpFieldCalculator, WesleyCrusherWarpFieldCalculator>(); // Uh oh
             services.AddSingleton<IStarship, GalaxyClassStarship>();
         }
 

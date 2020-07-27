@@ -9,10 +9,13 @@ namespace MattEland.Scientist.WarpCore.Controllers
     public class DeflectorController : ControllerBase
     {
         private readonly IDeflectorServiceLayer _deflectorServiceLayer;
+        private readonly IWarpCoilInductionService _coil;
 
-        public DeflectorController(IDeflectorServiceLayer deflectorServiceLayer)
+        public DeflectorController(IDeflectorServiceLayer deflectorServiceLayer,
+                                   IWarpCoilInductionService coil)
         {
             _deflectorServiceLayer = deflectorServiceLayer;
+            _coil = coil;
         }
 
         [HttpPost]
@@ -21,6 +24,8 @@ namespace MattEland.Scientist.WarpCore.Controllers
             _deflectorServiceLayer.ClearReadings();
 
             deflectorInfo.Readings.ForEach(reading => _deflectorServiceLayer.RegisterSensorReading(reading));
+
+            _coil.RegisterNewReadings();
 
             return Ok();
         }

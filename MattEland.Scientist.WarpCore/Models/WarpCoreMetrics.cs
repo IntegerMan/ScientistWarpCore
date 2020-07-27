@@ -1,4 +1,6 @@
-﻿namespace MattEland.Scientist.WarpCore.Models
+﻿using MattEland.Scientist.WarpCore.ServiceLayer;
+
+namespace MattEland.Scientist.WarpCore.Models
 {
     public class WarpCoreMetrics
     {
@@ -9,5 +11,6 @@
         public decimal CurrentOutput { get; set; }
 
         public decimal DesiredOutput { get; set; }
+        public WarpContainmentFieldSettings ContainmentSettings { get; set; }
     }
 }

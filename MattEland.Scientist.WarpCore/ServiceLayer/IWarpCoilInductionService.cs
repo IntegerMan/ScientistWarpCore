@@ -6,5 +6,7 @@ namespace MattEland.Scientist.WarpCore.ServiceLayer
     public interface IWarpCoilInductionService
     {
         WarpCoilInductionServiceDiagnostics GenerateDiagnosticInfo();
+        WarpContainmentFieldSettings ComputeWarpCoreSettings();
+        void RegisterNewReadings();
     }
 }
